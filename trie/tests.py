@@ -6,23 +6,23 @@ class TrieBuildTest(TestCase):
     """
     Test class fo trie build
     """
-    def trie_build_test_1(self):
+    def test_trie_build_1(self):
         """
         first test for trie build
         :return:
         """
         # First test to build the tree with an empty list
-        trie_1 = Trie()
-        self.assertequal(trie_1.build([]), {})
+        trie_1 = Trie("tests/test_file_1.csv")
+        self.assertEqual(trie_1.trie, {})
 
-    def trie_build_test_2(self):
+    def test_trie_build_2(self):
         """
         second test for trie build
         :return:
         """
         # Building trie with same starting letters
-        trie_2 = Trie()
-        self.assertequal(trie_2.build(['adob', 'adobe', 'ab', 'adoo']),
+        trie_2 = Trie("tests/test_file_2.csv")
+        self.assertEqual(trie_2.trie,
                          {'a': {'keyword_indexes': [0, 1, 2, 3],
                                 'b': {'_end_': '_end_'}, 'd': {'keyword_indexes': [0, 1, 3],
                                                                'o': {'keyword_indexes': [0, 1, 3],
@@ -31,14 +31,14 @@ class TrieBuildTest(TestCase):
                                                                      'o': {'_end_': '_end_'}}}},
                           'keyword_indexes': [0, 1, 2, 3]})
 
-    def trie_build_test_3(self):
+    def test_trie_build_3(self):
         """
         first test for trie build
         :return:
         """
         # Building the trie with different strings
-        trie_3 = Trie()
-        self.assertequal(trie_3.build(['adob', 'Bas', 'Cdes', 'Silicon']),
+        trie_3 = Trie("tests/test_file_3.csv")
+        self.assertEqual(trie_3.trie,
                          {'a': {'keyword_indexes': [0],
                                 'd': {'keyword_indexes': [0],
                                       'o': {'keyword_indexes': [0],
@@ -61,46 +61,39 @@ class TrieSearchTest(TestCase):
     """
     Test class fo trie search
     """
-    def trie_search_test_1(self):
+    def test_trie_search_1(self):
         """
         first test for trie search
         :return:
         """
         trie_1 = Trie()
-        trie_1.build([])
-        self.assertequal(trie_1.search('aa'), [])
+        trie_1.build("tests/test_file_1.csv")
+        self.assertEqual(trie_1.search('aa'), [])
 
-    def trie_search_test_2(self):
+    def test_trie_search_2(self):
         """
         first test for trie search
         :return:
         """
-        trie_2 = Trie()
-        trie_2.build(['adob', 'adobe', 'ab', 'adoo'])
-        self.assertequal(trie_2.search('a'), ['adob', 'adobe', 'ab', 'adoo'])
+        trie_2 = Trie("tests/test_file_2.csv")
+        self.assertEqual(trie_2.search('a'), ['Adob', 'adobe', 'aB', 'adoo'])
 
-    def trie_search_test_3(self):
+    def test_trie_search_3(self):
         """
         first test for trie search
         :return:
         """
-        trie_3 = Trie()
-        trie_3.build(['adob', 'adobe', 'ab', 'adoo'])
-        self.assertequal(trie_3.search('ad'), ['adob', 'adobe', 'adoo'])
+        trie_3 = Trie("tests/test_file_2.csv")
+        self.assertEqual(trie_3.search('ad'), ['Adob', 'adobe', 'adoo'])
 
-    def trie_search_test_4(self):
+    def test_trie_search_4(self):
         """
         first test for trie search
         :return:
         """
-        trie_4 = Trie()
-        trie_4.build(['adob', 'adobe', 'ab', 'adoo'])
-        self.assertequal(trie_3.search('adob'), ['adob', 'adobe'])
+        trie_4 = Trie("tests/test_file_2.csv")
+        self.assertEqual(trie_4.search('adob'), ['Adob', 'adobe'])
 
 
-
-
-
-
-        # will be implemented and tests wil be added
-        return True
+if __name__ == '__main__':
+    main()
